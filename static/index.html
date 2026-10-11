@@ -1,128 +1,47 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#101114">
-  <title>Sklep</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    :root{color-scheme:dark;--bg:#101114;--panel:#1a1c22;--panel2:#22252d;--text:#f7f7fb;--muted:#a5a9b5;--accent:#b8f36b;--accentText:#17200d;--line:#30333d;--danger:#ff7474}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-    .wrap{max-width:760px;margin:0 auto;padding:18px 14px 36px}
-    .hero{padding:20px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at top right,#37402a 0,transparent 42%),linear-gradient(135deg,#1d2026,#141519)}
-    .eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
-    h1{font-size:27px;line-height:1.1;margin:8px 0}p{color:var(--muted);line-height:1.45;margin:7px 0}
-    .section-title{font-size:19px;margin:24px 2px 12px}
-    .city{width:100%;display:flex;align-items:center;justify-content:space-between;padding:17px;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);font-size:16px;text-align:left}
-    .city.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .product{background:var(--panel);border:1px solid var(--line);border-radius:17px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
-    .product img{display:block;width:100%;height:142px;object-fit:cover;background:#24272f}
-    .product-body{padding:11px;display:flex;flex-direction:column;gap:9px;flex:1}
-    .product-name{font-size:13px;font-weight:750;line-height:1.35;min-height:36px}
-    .add{width:100%;border:0;border-radius:11px;background:var(--accent);color:var(--accentText);font-weight:800;padding:11px 8px;cursor:pointer}
-    .add.added{background:#303d27;color:#d8ffb1;border:1px solid #536f3c}
-    .cart{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:20px}
-    .cart-row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
-    .remove{border:0;background:transparent;color:var(--danger);font-size:12px;cursor:pointer}
-    .primary{border:0;border-radius:13px;background:var(--accent);color:var(--accentText);font-size:15px;font-weight:850;padding:15px;width:100%;margin-top:13px;cursor:pointer}
-    .primary:disabled{opacity:.45;cursor:not-allowed}
-    .check{display:flex;gap:10px;align-items:flex-start;margin-top:15px;color:#d4d6de;font-size:13px;line-height:1.4}
-    .check input{accent-color:var(--accent);margin-top:3px;width:18px;height:18px}
-    .notice{display:none;margin-top:14px;border-radius:12px;padding:12px;font-size:14px;line-height:1.45;background:#242a20;color:#e6ffd1}
-    .notice.error{background:#351f22;color:#ffd7da}.notice.show{display:block}
-    .small{font-size:12px;color:var(--muted);margin-top:12px}
-    .pill{font-size:11px;color:var(--accent);border:1px solid #465b32;border-radius:999px;padding:4px 7px;white-space:nowrap}
-    @media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product img{height:160px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101114">
+<title>Sklep</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{color-scheme:dark;--bg:#101114;--panel:#1a1c22;--text:#f7f7fb;--muted:#a5a9b5;--accent:#b8f36b;--accentText:#17200d;--line:#30333d;--danger:#ff7474}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.wrap{max-width:760px;margin:auto;padding:18px 14px 36px}.hero{padding:20px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#1d2026,#141519)}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}h1{font-size:27px;line-height:1.1;margin:8px 0}p{color:var(--muted);line-height:1.45;margin:7px 0}.section-title{font-size:19px;margin:24px 2px 12px}.city{width:100%;padding:17px;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);font-size:16px;text-align:left}.city.selected{border-color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product{background:var(--panel);border:1px solid var(--line);border-radius:17px;overflow:hidden;display:flex;flex-direction:column}.product img{width:100%;height:142px;object-fit:cover;background:#24272f}.product-body{padding:11px;display:flex;flex-direction:column;gap:9px;flex:1}.product-name{font-size:13px;font-weight:750;line-height:1.35;min-height:36px}.add{width:100%;border:0;border-radius:11px;background:var(--accent);color:var(--accentText);font-weight:800;padding:11px 8px}.add.added{background:#303d27;color:#d8ffb1}.cart{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:20px}.cart-row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.remove{border:0;background:transparent;color:var(--danger);font-size:12px}.primary{border:0;border-radius:13px;background:var(--accent);color:var(--accentText);font-size:15px;font-weight:850;padding:15px;width:100%;margin-top:13px}.primary:disabled{opacity:.45}.check{display:flex;gap:10px;align-items:flex-start;margin-top:15px;color:#d4d6de;font-size:13px;line-height:1.4}.check input{accent-color:var(--accent);margin-top:3px;width:18px;height:18px}.notice{display:none;margin-top:14px;border-radius:12px;padding:12px;font-size:14px;line-height:1.45;background:#242a20;color:#e6ffd1}.notice.error{background:#351f22;color:#ffd7da}.notice.show{display:block}.small{font-size:12px;color:var(--muted);margin-top:12px}.pill{font-size:11px;color:var(--accent);border:1px solid #465b32;border-radius:999px;padding:4px 7px}@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product img{height:160px}}
+</style>
 </head>
-<body>
-<div class="wrap">
-  <header class="hero">
-    <div class="eyebrow">Sklep online</div>
-    <h1>Wybierz swoje smaki</h1>
-    <p>Wybierz miasto jako pierwsze, potem dodaj produkty do koszyka. Każdy produkt można dodać tylko raz.</p>
-  </header>
-
-  <h2 class="section-title">1. Wybierz miasto</h2>
-  <button class="city" id="cityButton" type="button" onclick="chooseCity()">
-    <span>📍 Bielsko-Biała</span><span id="cityStatus">Wybierz →</span>
-  </button>
-
-  <section id="productsSection" hidden>
-    <h2 class="section-title">2. Wybierz produkty</h2>
-    <div class="grid" id="products"></div>
-    <div class="cart">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-        <h2 style="font-size:18px;margin:0">Twój koszyk</h2><span class="pill" id="cartCount">0 produktów</span>
-      </div>
-      <div id="cartItems"><p>Koszyk jest pusty.</p></div>
-      <label class="check"><input type="checkbox" id="ageCheck"><span>Potwierdzam, że mam ukończone 18 lat. Rozumiem, że to oświadczenie nie zastępuje ewentualnej wymaganej prawem weryfikacji wieku.</span></label>
-      <button class="primary" id="orderButton" onclick="submitOrder()" disabled>Złóż zamówienie</button>
-      <div id="notice" class="notice" role="status"></div>
-      <div class="small">Limit: maksymalnie 2 zamówienia dziennie na konto Telegram. Brak płatności w aplikacji.</div>
-    </div>
-  </section>
+<body><div class="wrap">
+<header class="hero"><div class="eyebrow">Sklep online</div><h1>Wybierz swoje smaki</h1><p>Wybierz miasto, dodaj produkty do koszyka i złóż zamówienie.</p></header>
+<h2 class="section-title">1. Wybierz miasto</h2>
+<button class="city" id="cityButton" type="button" onclick="chooseCity()">📍 Bielsko-Biała <span id="cityStatus" style="float:right">Wybierz →</span></button>
+<section id="productsSection" hidden><h2 class="section-title">2. Wybierz produkty</h2><div class="grid" id="products"></div>
+<div class="cart"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h2 style="font-size:18px;margin:0">Twój koszyk</h2><span class="pill" id="cartCount">0 produktów</span></div><div id="cartItems"><p>Koszyk jest pusty.</p></div>
+<label class="check"><input type="checkbox" id="ageCheck"><span>Potwierdzam, że mam ukończone 18 lat.</span></label>
+<button class="primary" id="orderButton" onclick="submitOrder()" disabled>Złóż zamówienie</button><div id="notice" class="notice" role="status"></div><div class="small">Maksymalnie 2 zamówienia dziennie na konto Telegram.</div></div></section>
 </div>
 <script>
-const tg = window.Telegram?.WebApp;
-if (tg) { tg.ready(); tg.expand(); }
-const products = [
- {id:"p1",name:"🍋 🍇 ELFLIQ - Blue Razz Lemonade",emoji:"🍋🍇",photo:"https://www.liqua-online.com/2470-default_md/elfliq-blue-razz-lemonade-elfbar.webp"},
- {id:"p2",name:"🍇 🌹 🌿 ELFLIQ - Blueberry Rose Mint",emoji:"🫐🌿",photo:"https://www.liqua-online.com/2478-default_md/elfliq-blueberry-elfbar.webp"},
- {id:"p3",name:"🥤 ELFLIQ - Cola",emoji:"🥤",photo:"https://www.liqua-online.com/2512-default_md/elfliq-cola-elfbar.webp"},
- {id:"p4",name:"🌿 ❄️ ELFLIQ - Cool Mint",emoji:"🌿❄️",photo:"https://www.liqua-online.com/2466-default_md/elfliq-spearmint-elfbar.webp"},
- {id:"p5",name:"🦬 ⚡ 🧊 ELFBULL Ice",emoji:"⚡🧊",photo:"https://www.liqua-online.com/2489-default_md/elfliq-elfbull-ice-elfbar.webp"},
- {id:"p6",name:"🍋 🟢 ELFLIQ - Lemon Lime",emoji:"🍋🟢",photo:"https://www.liqua-online.com/2500-default_md/elfliq-lemon-lime-elfbar.webp"},
- {id:"p7",name:"🍓 ❄️ ELFLIQ - Strawberry Snow",emoji:"🍓❄️",photo:"https://www.liqua-online.com/2453-default_md/elfliq-strawberry-ice-elfbar.webp"}
-];
-let city = "";
-const cart = new Set();
-const escapeHtml = s => s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function chooseCity(){
- city="Bielsko-Biała";
- document.getElementById("cityButton").classList.add("selected");
- document.getElementById("cityStatus").textContent="✓ Wybrano";
- document.getElementById("productsSection").hidden=false;
- renderProducts();
- renderCart();
-}
-function renderProducts(){
- const root=document.getElementById("products");
- root.innerHTML=products.map(p=>`<article class="product">
-  <img src="${p.photo}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.onerror=null;this.style.objectFit='contain';this.style.padding='25px';this.src='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250"><rect width="100%" height="100%" fill="%2324272f"/><text x="50%" y="54%" text-anchor="middle" font-size="70">${p.emoji}</text></svg>')">
-  <div class="product-body"><div class="product-name">${escapeHtml(p.name)}</div>
-  <button class="add ${cart.has(p.id)?'added':''}" onclick="toggleProduct('${p.id}')">${cart.has(p.id)?'✓ Dodano':'＋ Dodaj'}</button></div></article>`).join("");
-}
-function toggleProduct(id){ if(cart.has(id)) cart.delete(id); else cart.add(id); renderProducts(); renderCart(); }
-function renderCart(){
- const items=products.filter(p=>cart.has(p.id));
- document.getElementById("cartCount").textContent=items.length+" "+(items.length===1?"produkt":items.length>=2&&items.length<=4?"produkty":"produktów");
- document.getElementById("cartItems").innerHTML=items.length?items.map(p=>`<div class="cart-row"><span>${escapeHtml(p.name)}</span><button class="remove" onclick="toggleProduct('${p.id}')">Usuń</button></div>`).join(""):"<p>Koszyk jest pusty.</p>";
- document.getElementById("orderButton").disabled=items.length===0;
-}
-function showNotice(message,error=false){
- const n=document.getElementById("notice"); n.textContent=message; n.className="notice show"+(error?" error":"");
-}
+const tg=window.Telegram?.WebApp;if(tg){tg.ready();tg.expand();}
+const products=[
+{id:"p1",name:"🍋 🍇 ELFLIQ - Blue Razz Lemonade",emoji:"🍋🍇",photo:"https://www.liqua-online.com/2470-default_md/elfliq-blue-razz-lemonade-elfbar.webp"},
+{id:"p2",name:"🍇 🌹 🌿 ELFLIQ - Blueberry Rose Mint",emoji:"🫐🌿",photo:"https://www.liqua-online.com/2478-default_md/elfliq-blueberry-elfbar.webp"},
+{id:"p3",name:"🥤 ELFLIQ - Cola",emoji:"🥤",photo:"https://www.liqua-online.com/2512-default_md/elfliq-cola-elfbar.webp"},
+{id:"p4",name:"🌿 ❄️ ELFLIQ - Cool Mint",emoji:"🌿❄️",photo:"https://www.liqua-online.com/2466-default_md/elfliq-spearmint-elfbar.webp"},
+{id:"p5",name:"🦬 ⚡ 🧊 ELFBULL Ice",emoji:"⚡🧊",photo:"https://www.liqua-online.com/2489-default_md/elfliq-elfbull-ice-elfbar.webp"},
+{id:"p6",name:"🍋 🟢 ELFLIQ - Lemon Lime",emoji:"🍋🟢",photo:"https://www.liqua-online.com/2500-default_md/elfliq-lemon-lime-elfbar.webp"},
+{id:"p7",name:"🍓 ❄️ ELFLIQ - Strawberry Snow",emoji:"🍓❄️",photo:"https://www.liqua-online.com/2453-default_md/elfliq-strawberry-ice-elfbar.webp"}];
+let city="";const cart=new Set();
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function chooseCity(){city="Bielsko-Biała";document.getElementById("cityButton").classList.add("selected");document.getElementById("cityStatus").textContent="✓ Wybrano";document.getElementById("productsSection").hidden=false;renderProducts();renderCart();}
+function renderProducts(){document.getElementById("products").innerHTML=products.map(p=>`<article class="product"><img src="${p.photo}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.onerror=null;this.style.objectFit='contain';this.style.padding='25px';this.src='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250"><rect width="100%" height="100%" fill="%2324272f"/><text x="50%" y="54%" text-anchor="middle" font-size="70">${p.emoji}</text></svg>')"><div class="product-body"><div class="product-name">${escapeHtml(p.name)}</div><button class="add ${cart.has(p.id)?"added":""}" onclick="toggleProduct('${p.id}')">${cart.has(p.id)?"✓ Dodano":"＋ Dodaj"}</button></div></article>`).join("");}
+function toggleProduct(id){if(cart.has(id))cart.delete(id);else cart.add(id);renderProducts();renderCart();}
+function renderCart(){const items=products.filter(p=>cart.has(p.id));document.getElementById("cartCount").textContent=items.length+" "+(items.length===1?"produkt":items.length>=2&&items.length<=4?"produkty":"produktów");document.getElementById("cartItems").innerHTML=items.length?items.map(p=>`<div class="cart-row"><span>${escapeHtml(p.name)}</span><button class="remove" onclick="toggleProduct('${p.id}')">Usuń</button></div>`).join(""):"<p>Koszyk jest pusty.</p>";document.getElementById("orderButton").disabled=items.length===0;}
+function showNotice(message,error=false){const n=document.getElementById("notice");n.textContent=message;n.className="notice show"+(error?" error":"");}
 async function submitOrder(){
- if(!city){showNotice("Najpierw wybierz miasto.",true);return;}
- if(!cart.size){showNotice("Dodaj przynajmniej jeden produkt.",true);return;}
- if(!document.getElementById("ageCheck").checked){showNotice("Potwierdź ukończenie 18 lat.",true);return;}
- if(!tg || !tg.initData){showNotice("Otwórz aplikację przez przycisk w Telegramie, a nie w zwykłej przeglądarce.",true);return;}
- const button=document.getElementById("orderButton"); button.disabled=true; button.textContent="Wysyłanie…";
- try{
-  const response=await fetch("/api/order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({init_data:tg.initData,city,product_ids:[...cart],age_confirmed:true})});
-  const data=await response.json();
-  if(!response.ok) throw new Error(data.detail||"Nie udało się złożyć zamówienia.");
-  cart.clear(); renderProducts(); renderCart();
-  showNotice("✅ Zamówienie #"+data.order_id+" zostało wysłane do kuriera. Otwórz kontakt z kurierem: @"+data.courier_url.split("/").pop());
-  const link=document.createElement("a"); link.href=data.courier_url; link.target="_blank"; link.rel="noopener"; link.textContent="Otwórz kontakt z kurierem"; link.style.cssText="display:block;color:#b8f36b;margin-top:10px;font-weight:800";
-  document.getElementById("notice").appendChild(link);
-  if(tg.HapticFeedback) tg.HapticFeedback.notificationOccurred("success");
- }catch(e){showNotice(e.message||"Błąd połączenia. Spróbuj ponownie.",true);}
- finally{button.disabled=cart.size===0;button.textContent="Złóż zamówienie";}
+if(!city){showNotice("Najpierw wybierz miasto.",true);return;}if(!cart.size){showNotice("Dodaj przynajmniej jeden produkt.",true);return;}if(!document.getElementById("ageCheck").checked){showNotice("Potwierdź ukończenie 18 lat.",true);return;}if(!tg||!tg.initData){showNotice("Otwórz sklep przez Telegram, nie w zwykłej przeglądarce.",true);return;}
+const button=document.getElementById("orderButton");button.disabled=true;button.textContent="Wysyłanie…";
+try{const response=await fetch("/api/order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({init_data:tg.initData,city,product_ids:[...cart],age_confirmed:true})});let data;try{data=await response.json();}catch{throw new Error("Serwer zwrócił nieprawidłową odpowiedź.");}if(!response.ok)throw new Error(data.detail||"Nie udało się złożyć zamówienia.");cart.clear();renderProducts();renderCart();showNotice("✅ Zamówienie #"+data.order_id+" zostało zapisane.");const link=document.createElement("a");link.href=data.courier_url;link.target="_blank";link.rel="noopener";link.textContent="Otwórz kontakt z kurierem";link.style.cssText="display:block;color:#b8f36b;margin-top:10px;font-weight:800";document.getElementById("notice").appendChild(link);if(tg.HapticFeedback)tg.HapticFeedback.notificationOccurred("success");}
+catch(e){showNotice(e.message||"Błąd połączenia. Spróbuj ponownie.",true);}
+finally{button.disabled=cart.size===0;button.textContent="Złóż zamówienie";}
 }
-</script>
-</body>
-</html>
+</script></body></html>
